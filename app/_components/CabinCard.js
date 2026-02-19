@@ -1,8 +1,9 @@
 import { UsersIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import image from "@/public/about-1.jpg"
 
 function CabinCard({ cabin }) {
-  const { id, title, stock, discount = 30, price, image } = cabin;
+  const { id, title, stock, discount = 30, price } = cabin;
 
   return (
     <div className="flex border-primary-800 border">

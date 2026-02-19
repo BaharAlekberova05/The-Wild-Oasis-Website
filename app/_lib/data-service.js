@@ -259,3 +259,14 @@ export async function getProductById(id) {
 
   return data;
 }
+
+export async function getProductsByFilter({ category }) {
+  const params = new URLSearchParams();
+
+  if (category && category !== "all") {
+    params.append("category", category);
+  }
+
+  const res = await axios.get(`${BASE_URL}/products?${params.toString()}`);
+  return res.data.data;
+}

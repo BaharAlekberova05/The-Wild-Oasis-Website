@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Spinner from "../_components/Spinner";
+import Filter from "../_components/Filter";
 
 //! This page is not cached, so it will always fetch fresh data on each request
 export const revalidate = 0;
@@ -9,7 +10,10 @@ export const metadata = {
   title: "Cabins",
 };
 
-export default function Page() {
+export default async function Page({ searchParams }) {
+  const params = await searchParams;
+  const filter = params?.category ?? "all";
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -24,8 +28,10 @@ export default function Page() {
         Welcome to paradise.
       </p>
 
-      <Suspense fallback={<Spinner />}>
-        <CabinList />
+      <Filter/>
+
+      <Suspense fallback={<Spinner />} key={filter}>
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );
